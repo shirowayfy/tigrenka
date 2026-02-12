@@ -609,7 +609,7 @@ export interface ApiMapSectionMapSection extends Schema.SingleType {
     singularName: 'map-section';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Attribute.DateTime;
@@ -620,7 +620,6 @@ export interface ApiMapSectionMapSection extends Schema.SingleType {
     > &
       Attribute.Private;
     embedUrl: Attribute.Text & Attribute.Required;
-    publishedAt: Attribute.DateTime;
     subtitle: Attribute.String;
     title: Attribute.String & Attribute.Required;
     updatedAt: Attribute.DateTime;
