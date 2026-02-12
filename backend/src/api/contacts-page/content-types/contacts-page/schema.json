@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "contacts_pages",
+  "info": {
+    "singularName": "contacts-page",
+    "pluralName": "contacts-pages",
+    "displayName": "Contacts Page"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "address": { "type": "string", "required": true },
+    "phone": { "type": "string", "required": true },
+    "vkLink": { "type": "string" },
+    "collaborationText": { "type": "text" },
+    "socialText": { "type": "text" },
+    "offerLink": { "type": "string" }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "prices_pages",
+  "info": {
+    "singularName": "prices-page",
+    "pluralName": "prices-pages",
+    "displayName": "Prices Page"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "bannerTitle": { "type": "string", "required": true },
+    "bannerImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "introText1": { "type": "text" },
+    "introText2": { "type": "text" },
+    "pricingImage1": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "pricingImage2": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}

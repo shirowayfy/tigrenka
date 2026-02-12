@@ -1,0 +1,15 @@
+{
+  "kind": "singleType",
+  "collectionName": "map_sections",
+  "info": {
+    "singularName": "map-section",
+    "pluralName": "map-sections",
+    "displayName": "Map Section"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "subtitle": { "type": "string" },
+    "embedUrl": { "type": "text", "required": true }
+  }
+}

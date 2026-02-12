@@ -1,0 +1,48 @@
+{
+  "kind": "singleType",
+  "collectionName": "attractions_pages",
+  "info": {
+    "singularName": "attractions-page",
+    "pluralName": "attractions-pages",
+    "displayName": "Attractions Page"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "bannerTitle": { "type": "string", "required": true },
+    "bannerText": { "type": "string" },
+    "bannerButtonText": { "type": "string" },
+    "bannerButtonLink": { "type": "string" },
+    "bannerImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "activityParkLabel": { "type": "string" },
+    "activityParkNumber": { "type": "string" },
+    "activityParkUnit": { "type": "string" },
+    "activityParkDescription": { "type": "text" },
+    "activityParkImage1": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "activityParkImage2": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "xboxDescription": { "type": "text" },
+    "xboxFeatures": { "type": "text" },
+    "xboxImage1": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "xboxImage2": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}

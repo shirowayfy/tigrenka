@@ -1,0 +1,75 @@
+:root {
+  --color-primary: #FF9617;
+  --color-primary-dark: #E0850F;
+  --color-primary-light: #FFB85C;
+  --color-text: #2A2A2A;
+  --color-text-secondary: #6B6B6B;
+  --color-background: #FFFFFF;
+  --color-background-secondary: #F5F5F5;
+  --color-accent-light: #FFE7A4;
+  --color-link: #CD7000;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  font-family: 'Montserrat Alternates', sans-serif;
+  color: var(--color-text);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.container {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding-bottom: 80px;
+}
+
+@media (max-width: 768px) {
+  .page {
+    gap: 40px;
+    padding-bottom: 40px;
+  }
+}

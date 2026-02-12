@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "footers",
+  "info": {
+    "singularName": "footer",
+    "pluralName": "footers",
+    "displayName": "Footer"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "phone": { "type": "string", "required": true },
+    "address": { "type": "text", "required": true },
+    "copyright": { "type": "string" },
+    "vkLink": { "type": "string" },
+    "instagramLink": { "type": "string" },
+    "telegramLink": { "type": "string" }
+  }
+}

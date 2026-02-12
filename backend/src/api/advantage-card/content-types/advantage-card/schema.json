@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "advantage_cards",
+  "info": {
+    "singularName": "advantage-card",
+    "pluralName": "advantage-cards",
+    "displayName": "Advantage Card"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "label": { "type": "string", "required": true },
+    "number": { "type": "string" },
+    "unit": { "type": "string" },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "largeIcon": { "type": "boolean", "default": false },
+    "order": { "type": "integer", "default": 0 }
+  }
+}
