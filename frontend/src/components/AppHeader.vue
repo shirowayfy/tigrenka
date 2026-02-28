@@ -5,10 +5,12 @@ import { RouterLink, useRouter } from 'vue-router'
 const isMenuOpen = ref(false)
 const router = useRouter()
 
+// Открываем/закрываем мобильное бургер‑меню
 function toggleMenu() {
   isMenuOpen.value = !isMenuOpen.value
 }
 
+// После смены страницы автоматически закрываем бургер‑меню
 router.afterEach(() => {
   isMenuOpen.value = false
 })
@@ -41,7 +43,7 @@ router.afterEach(() => {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: #fff;
+  background-color: #FF9617;
 
   &__inner {
     display: flex;

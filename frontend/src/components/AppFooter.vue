@@ -8,6 +8,7 @@ const loading = ref(true)
 const email = ref('')
 const showPopup = ref(false)
 
+// При монтировании футера загружаем контакты и ссылки соцсетей из Strapi
 onMounted(async () => {
   try {
     data.value = await getFooter()
@@ -18,6 +19,7 @@ onMounted(async () => {
   }
 })
 
+// Обрабатываем отправку формы подписки и показываем всплывающее сообщение
 function handleSubscribe() {
   showPopup.value = true
   email.value = ''
@@ -89,12 +91,13 @@ function handleSubscribe() {
 
 <style lang="scss" scoped>
 .footer {
+  background-color: #2A2A2A;
+  color: #fff;
+
   &__inner {
     display: flex;
     flex-direction: column;
     gap: 40px;
-    background-color: #2A2A2A;
-    color: #fff;
     border-radius: 40px 40px 0 0;
     padding: 48px 40px 40px;
   }

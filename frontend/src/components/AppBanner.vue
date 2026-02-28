@@ -88,12 +88,22 @@ defineProps({
 
   &__image {
     flex-shrink: 0;
-    width: 380px;
+    width: 400px;
+    transition: transform 0.4s ease;
+    
+    &:hover {
+      transform: scale(1.08);
+    }
 
     img {
       width: 100%;
       height: auto;
       object-fit: contain;
+      transition: transform 0.4s ease;
+      
+      &:hover {
+        transform: scale(1.08);
+      }
     }
   }
 }
@@ -127,6 +137,14 @@ defineProps({
 
     &__image {
       width: 220px;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+      
+      img:hover {
+        transform: scale(1.05);
+      }
     }
   }
 }

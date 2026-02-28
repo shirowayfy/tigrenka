@@ -65,12 +65,22 @@ function toggle(index) {
     border-radius: 30px;
     padding: 32px 40px;
     cursor: pointer;
-    transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+    transition: all 0.4s ease;
+    
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 35px rgba(255, 150, 23, 0.2);
+    }
 
     &--active {
       background-color: var(--color-primary);
       color: #fff;
       box-shadow: 0 8px 32px rgba(255, 150, 23, 0.3);
+      
+      &:hover {
+        transform: scale(1.02);
+        box-shadow: 0 15px 40px rgba(255, 150, 23, 0.4);
+      }
 
       .faq__toggle {
         transform: rotate(180deg);
@@ -173,6 +183,10 @@ function toggle(index) {
     &__item {
       padding: 20px 24px;
       border-radius: 20px;
+      
+      &:hover {
+        transform: scale(1.01);
+      }
     }
 
     &__head {

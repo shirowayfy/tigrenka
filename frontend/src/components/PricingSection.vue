@@ -85,9 +85,16 @@ const sliderOptions = {
   }
 
   &__card {
+    transition: all 0.4s ease;
+    cursor: pointer;
     border-radius: 24px;
-    overflow: hidden;
     height: 310px;
+    overflow: hidden;
+
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 40px rgba(255, 150, 23, 0.3);
+  }
 
     &--text {
       background-color: var(--color-accent-light);
@@ -100,6 +107,7 @@ const sliderOptions = {
       line-height: 1.6;
       color: var(--color-text);
     }
+    
 
     &--image {
       img {

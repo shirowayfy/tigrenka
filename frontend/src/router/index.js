@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/pages/HomePage.vue'
 
+// Создаём экземпляр роутера и описываем все маршруты приложения
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  // Кастомное поведение скролла при переходе между страницами/якорями
   scrollBehavior(to) {
     if (to.hash) {
       return new Promise((resolve) => {
@@ -18,6 +20,7 @@ const router = createRouter({
     }
     return { top: 0 }
   },
+  // Список всех страниц (маршрутов) сайта
   routes: [
     {
       path: '/',
@@ -60,6 +63,7 @@ const router = createRouter({
 
 const defaultTitle = 'Игровой центр Тигра'
 
+// После каждого перехода по маршруту обновляем SEO‑мета‑данные страницы
 router.afterEach((to) => {
   document.title = to.meta.title || defaultTitle
 

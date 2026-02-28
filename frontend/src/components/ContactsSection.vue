@@ -5,6 +5,7 @@ import { getContactsPage } from '@/api/contacts'
 const data = ref(null)
 const loading = ref(true)
 
+// При монтировании секции контактов запрашиваем адрес, телефон и тексты из Strapi
 onMounted(async () => {
   try {
     data.value = await getContactsPage()
@@ -62,6 +63,13 @@ onMounted(async () => {
     font-weight: 500;
     line-height: 1.6;
     color: var(--color-text);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
   }
 
   &__link {
@@ -86,6 +94,10 @@ onMounted(async () => {
     &__card {
       padding: 20px;
       font-size: 14px;
+
+      &:hover {
+        transform: scale(1.02);
+      }
     }
   }
 }

@@ -108,7 +108,11 @@ const sliderOptions = {
 
 <style lang="scss" scoped>
 .advantages {
-&__grid {
+  // Общие переменные
+  --icon-offset: -20px;
+  --icon-large-offset: 20px;
+  
+  &__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 40px;
@@ -132,6 +136,52 @@ const sliderOptions = {
     flex-direction: column;
     justify-content: space-between;
     height: 310px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 35px rgba(255, 150, 23, 0.25);
+    }
+
+    // Индивидуальные размеры для каждой картинки
+    // яркое игровое пространство" (иконка с цифрой/элементами)
+    &:nth-child(1) .advantages__icon {
+      --icon-width: 215px;
+      --icon-height: 230px;
+    }
+    
+    // Для карточки банкетная комната (иконка с тортом/едой)
+    &:nth-child(2) .advantages__icon {
+      --icon-width: 240px;
+      --icon-height: 230px;
+    }
+    
+    // Для карточки "игровых зон" (игровая консоль/контроллер)
+    &:nth-child(3) .advantages__icon {
+      --icon-width: 300px;
+      --icon-height: 250px;
+      --icon-offset: -55px;
+    }
+    
+    // Для карточки "еда" (иконка с билетом/ценой)
+    &:nth-child(4) .advantages__icon {
+      --icon-width: 200px;
+      --icon-height: 200px;
+      --icon-offset: 0px;
+
+    }
+    // Для карточки "xbox" (иконка с билетом/ценой)
+    &:nth-child(5) .advantages__icon {
+      --icon-width: 180px;
+      --icon-height: 250px;
+      --icon-offset: -10px;
+    }
+     // Для карточки "билет" (иконка с билетом/ценой)
+    &:nth-child(6) .advantages__icon {
+      --icon-width: 280px;
+      --icon-height: 220px;
+      --icon-offset: 0px;
+    }
   }
 
   &__label-wrap {
@@ -165,14 +215,15 @@ const sliderOptions = {
 
   &__icon {
     position: absolute;
-    right: -40px;
-    bottom: 0;
-    width: 200px;
-    height: 200px;
+    right: var(--icon-offset, -20px);
+    bottom: var(--icon-offset, -20px);
+    width: var(--icon-width, 200px);
+    height: var(--icon-height, 200px);
     object-fit: contain;
+    transition: all 0.3s ease;
 
     &--large {
-      right: 20px;
+      right: var(--icon-large-offset, 20px);
       transform: scale(1.5);
     }
   }
@@ -182,6 +233,12 @@ const sliderOptions = {
     background-color: var(--color-accent-light);
     border-radius: 45px;
     padding: 40px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 20px 40px rgba(255, 150, 23, 0.3);
+    }
   }
 
   &__cols {
@@ -194,6 +251,16 @@ const sliderOptions = {
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding: 24px;
+    border-radius: 24px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 30px rgba(255, 150, 23, 0.2);
+      background-color: rgba(255, 255, 255, 0.7);
+    }
   }
 
   &__col-divider {
@@ -267,7 +334,7 @@ const sliderOptions = {
 
 @media (max-width: 768px) {
   .advantages {
-&__grid {
+    &__grid {
       display: none;
     }
 
@@ -282,12 +349,45 @@ const sliderOptions = {
       margin-top: 24px;
       border-radius: 24px;
       padding: 24px;
+      
+      &:hover {
+        transform: scale(1.02);
+        box-shadow: 0 15px 30px rgba(255, 150, 23, 0.25);
+      }
     }
 
     &__card {
       height: 260px;
       padding: 24px;
       border-radius: 24px;
+
+      // Мобильные размеры для каждой картинки
+      &:nth-child(1) .advantages__icon {
+        --icon-width: 160px;
+        --icon-height: 160px;
+      }
+      
+      &:nth-child(2) .advantages__icon {
+        --icon-width: 130px;
+        --icon-height: 130px;
+      }
+      
+      &:nth-child(3) .advantages__icon {
+        --icon-width: 180px;
+        --icon-height: 180px;
+        --icon-offset: -25px;
+      }
+      
+      &:nth-child(4) .advantages__icon {
+        --icon-width: 140px;
+        --icon-height: 140px;
+      }
+      
+      .advantages__icon--large {
+        --icon-width: 220px;
+        --icon-height: 220px;
+        --icon-offset: 15px;
+      }
     }
 
     &__label-wrap {
@@ -310,12 +410,13 @@ const sliderOptions = {
     }
 
     &__icon {
-      width: 140px;
-      height: 140px;
-      right: -28px;
+      width: var(--icon-width, 140px);
+      height: var(--icon-height, 140px);
+      right: var(--icon-offset, -28px);
+      bottom: var(--icon-offset, -28px);
 
       &--large {
-        right: 10px;
+        right: var(--icon-large-offset, 10px);
       }
     }
 
@@ -323,6 +424,14 @@ const sliderOptions = {
       flex-direction: column;
       gap: 20px;
       margin-top: 20px;
+    }
+
+    &__col {
+      padding: 20px;
+      
+      &:hover {
+        transform: scale(1.02);
+      }
     }
 
     &__col-divider {

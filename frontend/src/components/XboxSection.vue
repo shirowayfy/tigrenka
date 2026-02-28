@@ -30,7 +30,7 @@ const sliderOptions = {
     <!-- Desktop grid -->
     <div class="xbox__grid">
       <div class="xbox__card xbox__card--text">
-        <p>{{ description || 'Современная арена, где каждая деталь, каждый звук и каждое движение становятся частью вашей захватывающей истории.' }}</p>
+        <p>{{ description || 'Современная арена, где каждая деталь, каждый звук и каждое движение становятся частью вашей захватывающей истории' }}</p>
       </div>
       <div class="xbox__card xbox__card--image">
         <img :src="image1" alt="Xbox">
@@ -39,7 +39,7 @@ const sliderOptions = {
         <img :src="image2" alt="Xbox">
       </div>
       <div class="xbox__card xbox__card--text">
-        <p style="white-space: pre-line">{{ features || 'бесшовная реакция\nпространственный звук\nэмоциональный драйв\nкомандные игры до 8 человек\n13 вариантов игры от 6 до 99 лет' }}</p>
+        <p style="white-space: pre-line">{{ features || 'Бесшовная реакция\nпространственный звук\nэмоциональный драйв\nкомандные игры до 8 человек\n13 вариантов игры от 6 до 99 лет' }}</p>
       </div>
     </div>
 
@@ -47,7 +47,7 @@ const sliderOptions = {
     <Splide :options="sliderOptions" class="xbox__slider">
       <SplideSlide>
         <div class="xbox__card xbox__card--text">
-          <p>{{ description || 'Современная арена, где каждая деталь, каждый звук и каждое движение становятся частью вашей захватывающей истории.' }}</p>
+          <p>{{ description || 'Современная арена, где каждая деталь, каждый звук и каждое движение становятся частью вашей захватывающей истории' }}</p>
         </div>
       </SplideSlide>
       <SplideSlide>
@@ -57,7 +57,7 @@ const sliderOptions = {
       </SplideSlide>
       <SplideSlide>
         <div class="xbox__card xbox__card--text">
-          <p style="white-space: pre-line">{{ features || 'бесшовная реакция\nпространственный звук\nэмоциональный драйв\nкомандные игры до 8 человек\n13 вариантов игры от 6 до 99 лет' }}</p>
+          <p style="white-space: pre-line">{{ features || 'Бесшовная реакция\nпространственный звук\nэмоциональный драйв\nкомандные игры до 8 человек\n13 вариантов игры от 6 до 99 лет' }}</p>
         </div>
       </SplideSlide>
       <SplideSlide>
@@ -82,9 +82,16 @@ const sliderOptions = {
   }
 
   &__card {
+    transition: all 0.4s ease;
+    cursor: pointer;
     border-radius: 24px;
-    overflow: hidden;
     height: 310px;
+    overflow: hidden;
+
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 40px rgba(255, 150, 23, 0.3);
+  }
 
     &--text {
       background-color: var(--color-accent-light);

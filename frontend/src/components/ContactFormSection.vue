@@ -160,7 +160,7 @@ async function onSubmit() {
 
   &__image {
     position: absolute;
-    right: -100px;
+    right: -40px;
     top: 0;
     bottom: 0;
     width: 400px;

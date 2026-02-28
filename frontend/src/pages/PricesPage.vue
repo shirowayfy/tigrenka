@@ -12,6 +12,7 @@ const pageData = ref(null)
 const pricingCards = ref([])
 const loading = ref(true)
 
+// При загрузке страницы цен одновременно запрашиваем саму страницу и карточки тарифов
 onMounted(async () => {
   try {
     const [page, cards] = await Promise.all([
@@ -61,9 +62,16 @@ onMounted(async () => {
   font-size: 24px;
   font-weight: 500;
   line-height: 1.6;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 
   p + p {
     margin-top: 8px;
+  }
+
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -72,6 +80,10 @@ onMounted(async () => {
     padding: 24px;
     font-size: 16px;
     border-radius: 20px;
+
+    &:hover {
+      transform: scale(1.02);
+    }
   }
 }
 </style>

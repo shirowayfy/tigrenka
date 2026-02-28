@@ -13,6 +13,7 @@ import { strapiMedia } from '@/api/strapi'
 const pageData = ref(null)
 const loading = ref(true)
 
+// При первом открытии главной страницы загружаем её данные из Strapi
 onMounted(async () => {
   try {
     pageData.value = await getHomePage()

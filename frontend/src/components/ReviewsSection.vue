@@ -136,6 +136,14 @@ function goTo(index) {
     padding: 28px;
     position: relative;
     margin-bottom: 20px;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      border-color: #fff;
+    }
 
     &::before,
     &::after {
@@ -145,6 +153,7 @@ function goTo(index) {
       left: 40px;
       width: 0;
       height: 0;
+      transition: all 0.3s ease;
     }
 
     &::before {
@@ -166,16 +175,32 @@ function goTo(index) {
     font-size: 16px;
     line-height: 1.6;
     color: #fff;
+    transition: transform 0.3s ease;
+    
+    .reviews__card:hover & {
+      transform: translateY(-2px);
+    }
   }
 
   &__author {
     padding: 20px 0 0 8px;
     color: #fff;
+    transition: transform 0.3s ease;
+    
+    .reviews__card:hover & {
+      transform: translateX(5px);
+    }
 
     &-name {
       font-family: 'Montserrat Alternates', sans-serif;
       font-size: 18px;
       font-weight: 600;
+      transition: color 0.3s ease;
+      
+      .reviews__card:hover + .reviews__author &,
+      .reviews__slide:hover & {
+        color: var(--color-accent-light);
+      }
     }
 
     &-date {
@@ -195,10 +220,11 @@ function goTo(index) {
 
   &__arrow {
     color: #fff;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s, transform 0.3s ease;
 
     &:hover {
       opacity: 0.7;
+      transform: scale(1.1);
     }
   }
 
@@ -210,7 +236,7 @@ function goTo(index) {
 
   &__dot {
     color: rgba(255, 255, 255, 0.4);
-    transition: color 0.3s;
+    transition: color 0.3s, transform 0.3s ease;
 
     &--active {
       color: #fff;
@@ -218,6 +244,7 @@ function goTo(index) {
 
     &:hover {
       color: rgba(255, 255, 255, 0.7);
+      transform: scale(1.2);
     }
   }
 }
@@ -234,6 +261,10 @@ function goTo(index) {
     &__card {
       padding: 20px;
       border-radius: 24px;
+      
+      &:hover {
+        transform: scale(1.02);
+      }
     }
 
     &__card-text {
