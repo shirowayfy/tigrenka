@@ -2,7 +2,7 @@
 import SectionHeader from './SectionHeader.astro'
 import tigerFormImg from '../assets/images/tiger-form.png'
 
-const strapiUrl = import.meta.env.PUBLIC_STRAPI_URL || 'http://localhost:1337'
+const strapiUrl = process.env.PUBLIC_STRAPI_BROWSER_URL || process.env.PUBLIC_STRAPI_URL || 'http://localhost:1337'
 ---
 
 <section class="contact-form">
