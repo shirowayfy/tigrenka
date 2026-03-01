@@ -72,11 +72,21 @@ const { title, text, buttonText, buttonLink, image } = Astro.props
   &__image {
     flex-shrink: 0;
     width: 380px;
+    transition: transform 0.4s ease;
+
+    &:hover {
+      transform: scale(1.08);
+    }
 
     img {
       width: 100%;
       height: auto;
       object-fit: contain;
+      transition: transform 0.4s ease;
+
+      &:hover {
+        transform: scale(1.08);
+      }
     }
   }
 }
@@ -110,6 +120,14 @@ const { title, text, buttonText, buttonLink, image } = Astro.props
 
     &__image {
       width: 220px;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      img:hover {
+        transform: scale(1.05);
+      }
     }
   }
 }

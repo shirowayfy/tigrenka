@@ -48,6 +48,12 @@ const { id, label, number, unit, description, image1, image2 } = Astro.props
     border-radius: 24px;
     overflow: hidden;
     height: 310px;
+    transition: all 0.4s ease;
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 20px 40px rgba(255, 150, 23, 0.3);
+    }
 
     &--text {
       background-color: var(--color-accent-light);

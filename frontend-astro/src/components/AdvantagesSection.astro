@@ -70,6 +70,12 @@ const [cards, featured] = await Promise.all([
     flex-direction: column;
     justify-content: space-between;
     height: 310px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 35px rgba(255, 150, 23, 0.25);
+    }
   }
 
   &__label-wrap {
@@ -108,6 +114,7 @@ const [cards, featured] = await Promise.all([
     width: 200px;
     height: 200px;
     object-fit: contain;
+    transition: all 0.3s ease;
 
     &--large {
       right: 20px;

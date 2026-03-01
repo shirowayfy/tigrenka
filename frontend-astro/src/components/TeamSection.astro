@@ -36,6 +36,32 @@ const members = await getTeamMembers()
     border: 2px solid var(--color-primary);
     border-radius: 24px;
     padding: 32px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 30px rgba(255, 150, 23, 0.25);
+
+      .team__paw {
+        transform: scale(1.1) rotate(10deg);
+      }
+
+      .team__avatar {
+        border-color: var(--color-primary-dark);
+      }
+
+      .team__avatar-placeholder {
+        color: var(--color-primary-dark);
+      }
+
+      .team__name {
+        color: var(--color-primary);
+      }
+
+      .team__divider {
+        background-color: var(--color-primary-dark);
+      }
+    }
   }
 
   &__paw {
@@ -46,6 +72,7 @@ const members = await getTeamMembers()
     display: inline !important;
     vertical-align: middle;
     margin-left: 8px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
 
   &__avatar {
@@ -58,6 +85,7 @@ const members = await getTeamMembers()
     justify-content: center;
     margin-bottom: 16px;
     background-color: var(--color-accent-light);
+    transition: border-color 0.3s ease;
   }
 
   &__avatar-placeholder {
@@ -65,6 +93,7 @@ const members = await getTeamMembers()
     font-size: 24px;
     font-weight: 700;
     color: var(--color-primary);
+    transition: color 0.3s ease;
   }
 
   &__name {
@@ -73,6 +102,7 @@ const members = await getTeamMembers()
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 16px;
+    transition: color 0.3s ease;
   }
 
   &__divider {
@@ -80,6 +110,7 @@ const members = await getTeamMembers()
     background-color: var(--color-primary);
     border-radius: 2px;
     margin-bottom: 16px;
+    transition: background-color 0.3s ease;
   }
 
   &__description {

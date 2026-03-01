@@ -8,6 +8,8 @@ import '@fontsource/montserrat-alternates/700.css'
 import '../assets/styles/main.scss'
 import AppHeader from '../components/AppHeader.astro'
 import AppFooter from '../components/AppFooter.astro'
+import FloatingContacts from '../components/FloatingContacts.astro'
+import { getFooter } from '../api/footer'
 
 interface Props {
   title: string
@@ -16,6 +18,8 @@ interface Props {
 }
 
 const { title, description, bodyClass } = Astro.props
+const footerData = await getFooter()
+
 ---
 
 <html lang="ru">
@@ -76,5 +80,12 @@ const { title, description, bodyClass } = Astro.props
     <slot />
   </main>
   <AppFooter />
+  {footerData && (
+    <FloatingContacts
+      phone={footerData.phone}
+      vkLink={footerData.vkLink}
+      telegramLink={footerData.telegramLink}
+    />
+  )}
 </body>
 </html>
