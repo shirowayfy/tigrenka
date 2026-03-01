@@ -1,0 +1,156 @@
+---
+import SectionHeader from './SectionHeader.astro'
+
+interface Props {
+  id?: string
+  label?: string
+  number?: string
+  unit?: string
+  description?: string
+  image1?: string
+  image2?: string
+}
+
+const { id, label, number, unit, description, image1, image2 } = Astro.props
+---
+
+<section id={id} class="activity-park">
+  <SectionHeader title="Активити парк" />
+  <div class="activity-park__grid">
+    <div class="activity-park__card activity-park__card--text activity-park__card--stats">
+      <p class="activity-park__label">{label || 'Для разных возрастов'}</p>
+      <div class="activity-park__value">
+        <p class="activity-park__number">{number || '6'}</p>
+        <p class="activity-park__unit">{unit || 'игровых зон'}</p>
+      </div>
+    </div>
+    <div class="activity-park__card activity-park__card--image activity-park__card--img1">
+      <img src={image1} alt="Тигра" width="560" height="310" loading="lazy">
+    </div>
+    <div class="activity-park__card activity-park__card--image activity-park__card--img2">
+      <img src={image2} alt="Игровая зона" width="560" height="310" loading="lazy">
+    </div>
+    <div class="activity-park__card activity-park__card--text activity-park__card--desc">
+      <p>{description || 'большой лабиринт, домики на столбах, горки, батутная арена, бассейн с шарами, мячи, конструктор, модули, качели'}</p>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+.activity-park {
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  &__card {
+    border-radius: 24px;
+    overflow: hidden;
+    height: 310px;
+
+    &--text {
+      background-color: var(--color-accent-light);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &--image {
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+    }
+
+    &--desc {
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--color-text);
+      justify-content: center;
+    }
+  }
+
+  &__label {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  &__number {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 128px;
+    font-weight: 900;
+    line-height: 0.75;
+    color: var(--color-text);
+  }
+
+  &__unit {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--color-text);
+  }
+}
+
+@media (max-width: 768px) {
+  .activity-park {
+    &__grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+      padding: 0 20px 16px;
+      margin: 0 -20px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &__card {
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      width: 75%;
+      height: 260px;
+      border-radius: 24px;
+
+      &--text {
+        padding: 24px;
+      }
+
+      &--desc {
+        font-size: 16px;
+        order: 2;
+      }
+
+      &--img1 {
+        order: 1;
+      }
+
+      &--img2 {
+        order: 3;
+      }
+    }
+
+    &__label {
+      font-size: 22px;
+    }
+
+    &__number {
+      font-size: 56px;
+    }
+
+    &__unit {
+      font-size: 24px;
+    }
+  }
+}
+</style>

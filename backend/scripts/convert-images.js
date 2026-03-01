@@ -12,7 +12,7 @@ const path = require('path')
 const fs = require('fs')
 const { execSync, execFileSync } = require('child_process')
 
-const IMAGES_DIR = path.join(__dirname, '../../frontend/src/assets/images')
+const IMAGES_DIR = path.join(__dirname, '../../frontend-astro/src/assets/images')
 
 // PNG → WebP конфигурация: [relPath, quality]
 const CONVERSIONS = [

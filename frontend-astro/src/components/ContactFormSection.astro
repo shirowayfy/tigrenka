@@ -1,0 +1,239 @@
+---
+import SectionHeader from './SectionHeader.astro'
+import tigerFormImg from '../assets/images/tiger-form.png'
+
+const strapiUrl = import.meta.env.PUBLIC_STRAPI_URL || 'http://localhost:1337'
+---
+
+<section class="contact-form">
+  <SectionHeader title="Свяжитесь с нами" subtitle="Если у вас возникли вопросы или вы хотите устроить праздник" />
+  <div class="contact-form__wrapper">
+    <form class="contact-form__form" data-api-url={`${strapiUrl}/api/contact-submissions`}>
+      <div class="contact-form__field">
+        <label class="contact-form__label">Имя*</label>
+        <input type="text" name="name" class="contact-form__input" required>
+      </div>
+      <div class="contact-form__field">
+        <label class="contact-form__label">Номер*</label>
+        <input type="tel" name="phone" class="contact-form__input" required>
+      </div>
+      <div class="contact-form__field">
+        <label class="contact-form__label">Сообщение*</label>
+        <textarea name="message" class="contact-form__textarea" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="contact-form__button">Отправить запрос</button>
+    </form>
+    <div class="contact-form__image">
+      <img src={tigerFormImg.src} alt="" width="400" height="500" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<div class="popup popup--form" aria-hidden="true">
+  <div class="popup__content">
+    <button class="popup__close" aria-label="Закрыть">&times;</button>
+    <p class="popup__text">Ваш запрос успешно отправлен!</p>
+  </div>
+</div>
+
+<script>
+  function initContactForm() {
+    const form = document.querySelector('.contact-form__form') as HTMLFormElement
+    const popup = document.querySelector('.popup--form') as HTMLElement
+
+    if (!form) return
+
+    const apiUrl = form.dataset.apiUrl || 'http://localhost:1337/api/contact-submissions'
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault()
+
+      const nameInput = form.querySelector('input[name="name"]') as HTMLInputElement
+      const phoneInput = form.querySelector('input[name="phone"]') as HTMLInputElement
+      const messageInput = form.querySelector('textarea[name="message"]') as HTMLTextAreaElement
+
+      // Clear previous errors
+      form.querySelectorAll('.contact-form__input--error').forEach(el => {
+        el.classList.remove('contact-form__input--error')
+      })
+
+      let hasError = false
+      if (!nameInput.value.trim()) { nameInput.classList.add('contact-form__input--error'); hasError = true }
+      if (!phoneInput.value.trim()) { phoneInput.classList.add('contact-form__input--error'); hasError = true }
+      if (!messageInput.value.trim()) { messageInput.classList.add('contact-form__input--error'); hasError = true }
+      if (hasError) return
+
+      const btn = form.querySelector('.contact-form__button') as HTMLButtonElement
+      btn.disabled = true
+      btn.textContent = 'Отправка...'
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            data: {
+              name: nameInput.value,
+              phone: phoneInput.value,
+              message: messageInput.value,
+            }
+          }),
+        })
+
+        if (!response.ok) throw new Error('Submit failed')
+
+        popup?.classList.add('popup--visible')
+        popup?.setAttribute('aria-hidden', 'false')
+        form.reset()
+        setTimeout(() => {
+          popup?.classList.remove('popup--visible')
+          popup?.setAttribute('aria-hidden', 'true')
+        }, 3000)
+      } catch (err) {
+        console.error('Form submission failed:', err)
+      } finally {
+        btn.disabled = false
+        btn.textContent = 'Отправить запрос'
+      }
+    })
+
+    popup?.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        popup.classList.remove('popup--visible')
+        popup.setAttribute('aria-hidden', 'true')
+      }
+    })
+
+    const closeBtn = popup?.querySelector('.popup__close')
+    closeBtn?.addEventListener('click', () => {
+      popup?.classList.remove('popup--visible')
+      popup?.setAttribute('aria-hidden', 'true')
+    })
+  }
+
+  initContactForm()
+  document.addEventListener('astro:after-swap', initContactForm)
+</script>
+
+<style lang="scss">
+.contact-form {
+  &__wrapper {
+    position: relative;
+    display: flex;
+    background-color: var(--color-accent-light);
+    border-radius: 45px;
+    padding: 48px;
+    overflow: hidden;
+  }
+
+  &__form {
+    flex: 1;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__label {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 12px;
+    background-color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: box-shadow 0.3s;
+
+    &:focus {
+      box-shadow: 0 0 0 2px var(--color-primary);
+    }
+
+    &--error {
+      box-shadow: 0 0 0 2px #e74c3c;
+    }
+  }
+
+  &__textarea {
+    resize: none;
+    min-height: 120px;
+  }
+
+  &__button {
+    padding: 20px;
+    background-color: var(--color-text);
+    color: #fff;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 16px;
+    transition: opacity 0.3s;
+    max-width: 520px;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    right: -100px;
+    top: 0;
+    bottom: 0;
+    width: 400px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-form {
+    &__wrapper {
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    &__form {
+      max-width: 100%;
+      gap: 16px;
+    }
+
+    &__image {
+      display: none;
+    }
+
+    &__input,
+    &__textarea {
+      padding: 14px 16px;
+      font-size: 14px;
+    }
+
+    &__button {
+      font-size: 16px;
+      padding: 16px;
+    }
+  }
+}
+</style>

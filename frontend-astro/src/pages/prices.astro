@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro'
+import AppBanner from '../components/AppBanner.astro'
+import PricingSection from '../components/PricingSection.astro'
+import ContactFormSection from '../components/ContactFormSection.astro'
+import MapSection from '../components/MapSection.astro'
+import { getPricesPage } from '../api/prices'
+import { getPricingCards } from '../api/collections'
+import { strapiMedia } from '../api/strapi'
+
+const [pageData, pricingCards] = await Promise.all([
+  getPricesPage(),
+  getPricingCards(),
+])
+---
+
+<Layout
+  title="Цены — Игровой центр Тигра в Аше"
+  description="Стоимость посещения игрового центра Тигра в Аше. Билеты на аттракционы, XBOX, праздники и дни рождения. Доступные цены для всей семьи."
+>
+  <div class="page container">
+    {pageData && (
+      <>
+        <AppBanner
+          title={pageData.bannerTitle}
+          image={strapiMedia(pageData.bannerImage)}
+        />
+        <div class="prices__text">
+          <p>{pageData.introText1}</p>
+          <p>{pageData.introText2}</p>
+        </div>
+        <PricingSection
+          cards={pricingCards}
+          image1={strapiMedia(pageData.pricingImage1)}
+          image2={strapiMedia(pageData.pricingImage2)}
+        />
+      </>
+    )}
+    <ContactFormSection />
+    <MapSection />
+  </div>
+</Layout>
+
+<style lang="scss">
+.prices__text {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: 45px;
+  padding: 50px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.6;
+
+  p + p {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .prices__text {
+    padding: 24px;
+    font-size: 16px;
+    border-radius: 20px;
+  }
+}
+</style>

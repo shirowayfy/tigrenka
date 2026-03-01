@@ -1,0 +1,222 @@
+---
+import logoImg from '../assets/images/logo.png'
+
+interface Props {
+  currentPath: string
+}
+
+const { currentPath } = Astro.props
+
+const links = [
+  { href: '/', text: 'О парке' },
+  { href: '/attractions', text: 'Аттракционы' },
+  { href: '/prices', text: 'Цены' },
+  { href: '/contacts', text: 'Контакты' },
+]
+---
+
+<header class="header">
+  <div class="header__inner container">
+    <a href="/" class="header__logo">
+      <img src={logoImg.src} alt="Логотип" class="header__logo-icon" width="64" height="64">
+      Игровая<br>тигра
+    </a>
+    <button class="header__burger" aria-label="Меню" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="header__nav">
+      {links.map(link => (
+        <a
+          href={link.href}
+          class:list={['header__link', { 'header__link--active': currentPath === link.href }]}
+          data-text={link.text}
+        >
+          {link.text}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    const burger = document.querySelector('.header__burger')
+    const nav = document.querySelector('.header__nav')
+
+    burger?.addEventListener('click', () => {
+      const isOpen = burger.classList.toggle('header__burger--active')
+      nav?.classList.toggle('header__nav--open')
+      burger.setAttribute('aria-expanded', String(isOpen))
+    })
+  }
+
+  initHeader()
+
+  document.addEventListener('astro:after-swap', initHeader)
+
+  document.addEventListener('astro:before-preparation', () => {
+    const burger = document.querySelector('.header__burger')
+    const nav = document.querySelector('.header__nav')
+    burger?.classList.remove('header__burger--active')
+    nav?.classList.remove('header__nav--open')
+    burger?.setAttribute('aria-expanded', 'false')
+  })
+</script>
+
+<style lang="scss">
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #fff;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    z-index: 11;
+  }
+
+  &__logo-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+  }
+
+  &__burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 32px;
+    height: 32px;
+    z-index: 11;
+
+    span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: currentColor;
+      border-radius: 1px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    &--active {
+      span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+
+      span:nth-child(2) {
+        opacity: 0;
+      }
+
+      span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  &__link {
+    position: relative;
+    padding-bottom: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: opacity 0.3s;
+
+    &::before {
+      content: attr(data-text);
+      display: block;
+      font-weight: 700;
+      height: 0;
+      overflow: hidden;
+      visibility: hidden;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: currentColor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    &--active {
+      font-weight: 700;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    &__burger {
+      display: flex;
+    }
+
+    &__nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      background-color: #fff;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+
+      &--open {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    &__link {
+      font-size: 24px;
+    }
+
+    &__logo {
+      gap: 16px;
+      font-size: 24px;
+    }
+
+    &__logo-icon {
+      width: 48px;
+      height: 48px;
+    }
+  }
+}
+</style>

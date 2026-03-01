@@ -15,7 +15,7 @@ const path = require('path')
 const fs = require('fs')
 
 // Путь к изображениям во frontend
-const IMAGES_DIR = path.join(__dirname, '../../frontend/src/assets/images')
+const IMAGES_DIR = path.join(__dirname, '../../frontend-astro/src/assets/images')
 
 // ─── Данные для заполнения ───────────────────────────────────────────────────
 

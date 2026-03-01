@@ -1,0 +1,215 @@
+---
+import SectionHeader from './SectionHeader.astro'
+import { getFaqs } from '../api/collections'
+
+const items = await getFaqs()
+---
+
+{items.length > 0 && (
+  <section class="faq">
+    <SectionHeader title="Вопросы и ответы" subtitle="Ответы на ваши интересующие вопросы, а также наши новости" />
+    <div class="faq__list">
+      {items.map((item, i) => (
+        <div class="faq__item" role="button" tabindex="0" aria-expanded="false">
+          <div class="faq__head">
+            <span class="faq__number">{String(i + 1).padStart(2, '0')}</span>
+            <span class="faq__question">{item.question}</span>
+            <button class="faq__toggle" aria-label="Раскрыть" tabindex="-1">
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+          <div class="faq__body">
+            <div class="faq__body-inner">
+              <div class="faq__divider"></div>
+              <p class="faq__answer">{item.answer}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+<script>
+  function initFaq() {
+    document.querySelectorAll('.faq__item').forEach(item => {
+      item.addEventListener('click', () => {
+        const isActive = item.classList.contains('faq__item--active')
+        document.querySelectorAll('.faq__item--active').forEach(el => {
+          el.classList.remove('faq__item--active')
+          el.setAttribute('aria-expanded', 'false')
+        })
+        if (!isActive) {
+          item.classList.add('faq__item--active')
+          item.setAttribute('aria-expanded', 'true')
+        }
+      })
+
+      item.addEventListener('keydown', (e) => {
+        if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') {
+          e.preventDefault()
+          ;(item as HTMLElement).click()
+        }
+      })
+    })
+  }
+
+  initFaq()
+  document.addEventListener('astro:after-swap', initFaq)
+</script>
+
+<style lang="scss">
+.faq {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__item {
+    background-color: var(--color-accent-light);
+    border-radius: 30px;
+    padding: 32px 40px;
+    cursor: pointer;
+    transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+
+    &--active {
+      background-color: var(--color-primary);
+      color: #fff;
+      box-shadow: 0 8px 32px rgba(255, 150, 23, 0.3);
+
+      .faq__toggle {
+        transform: rotate(180deg);
+
+        span:nth-child(2) {
+          transform: translate(-50%, -50%) scaleY(0);
+        }
+      }
+
+      .faq__divider {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  &__question {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    flex: 1;
+  }
+
+  &__toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    flex-shrink: 0;
+    margin-left: auto;
+    transition: transform 0.4s ease;
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background-color: currentColor;
+      border-radius: 1px;
+      transition: transform 0.4s ease;
+
+      &:nth-child(1) {
+        width: 16px;
+        height: 2px;
+        transform: translate(-50%, -50%);
+      }
+
+      &:nth-child(2) {
+        width: 2px;
+        height: 16px;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  &__body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease;
+  }
+
+  &__item--active &__body {
+    grid-template-rows: 1fr;
+  }
+
+  &__body-inner {
+    overflow: hidden;
+  }
+
+  &__divider {
+    height: 2px;
+    background-color: var(--color-primary);
+    margin: 20px 0;
+    transition: background-color 0.3s;
+  }
+
+  &__answer {
+    font-size: 16px;
+    line-height: 1.5;
+    padding-bottom: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .faq {
+    &__item {
+      padding: 20px 24px;
+      border-radius: 20px;
+    }
+
+    &__head {
+      gap: 12px;
+    }
+
+    &__number {
+      font-size: 32px;
+    }
+
+    &__question {
+      font-size: 18px;
+    }
+
+    &__toggle {
+      width: 32px;
+      height: 32px;
+
+      span:nth-child(1) {
+        width: 12px;
+      }
+
+      span:nth-child(2) {
+        height: 12px;
+      }
+    }
+
+    &__answer {
+      font-size: 14px;
+    }
+  }
+}
+</style>

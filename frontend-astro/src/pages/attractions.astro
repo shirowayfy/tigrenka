@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro'
+import AppBanner from '../components/AppBanner.astro'
+import ActivityParkSection from '../components/ActivityParkSection.astro'
+import XboxSection from '../components/XboxSection.astro'
+import ReviewsSection from '../components/ReviewsSection.astro'
+import ContactFormSection from '../components/ContactFormSection.astro'
+import MapSection from '../components/MapSection.astro'
+import { getAttractionsPage } from '../api/attractions'
+import { strapiMedia } from '../api/strapi'
+
+const pageData = await getAttractionsPage()
+---
+
+<Layout
+  title="Аттракционы и развлечения — Игровой центр Тигра в Аше"
+  description="Активити-парк с 6 игровыми зонами, батутная арена, бассейн с шарами, лабиринт, горки, XBOX — развлечения для детей любого возраста в центре Аши."
+>
+  <div class="page container">
+    {pageData && (
+      <>
+        <AppBanner
+          title={pageData.bannerTitle}
+          text={pageData.bannerText}
+          buttonText={pageData.bannerButtonText}
+          buttonLink={pageData.bannerButtonLink}
+          image={strapiMedia(pageData.bannerImage)}
+        />
+        <ActivityParkSection
+          id="activity-park"
+          label={pageData.activityParkLabel}
+          number={pageData.activityParkNumber}
+          unit={pageData.activityParkUnit}
+          description={pageData.activityParkDescription}
+          image1={strapiMedia(pageData.activityParkImage1)}
+          image2={strapiMedia(pageData.activityParkImage2)}
+        />
+        <XboxSection
+          id="xbox"
+          description={pageData.xboxDescription}
+          features={pageData.xboxFeatures}
+          image1={strapiMedia(pageData.xboxImage1)}
+          image2={strapiMedia(pageData.xboxImage2)}
+        />
+      </>
+    )}
+    <ReviewsSection />
+    <ContactFormSection />
+    <MapSection />
+  </div>
+</Layout>

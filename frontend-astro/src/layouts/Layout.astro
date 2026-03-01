@@ -1,0 +1,80 @@
+---
+import { ViewTransitions } from 'astro:transitions'
+import '@fontsource/montserrat/700.css'
+import '@fontsource/montserrat/900.css'
+import '@fontsource/montserrat-alternates/400.css'
+import '@fontsource/montserrat-alternates/500.css'
+import '@fontsource/montserrat-alternates/700.css'
+import '../assets/styles/main.scss'
+import AppHeader from '../components/AppHeader.astro'
+import AppFooter from '../components/AppFooter.astro'
+
+interface Props {
+  title: string
+  description: string
+  bodyClass?: string
+}
+
+const { title, description, bodyClass } = Astro.props
+---
+
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#FF9617">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="keywords" content="игровой центр Аша, детский развлекательный центр, Тигра Аша, аттракционы для детей, день рождения Аша, батуты, XBOX">
+  <link rel="canonical" href={`https://игровая-тигра.рф${Astro.url.pathname}`}>
+
+  <!-- Open Graph -->
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Игровой центр Тигра">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={`https://игровая-тигра.рф${Astro.url.pathname}`}>
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+
+  <!-- Schema.org -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "AmusementPark",
+    "name": "Игровой центр Тигра",
+    "description": "Детский развлекательный центр с 6 игровыми зонами, батутной ареной, XBOX и банкетной комнатой для проведения праздников.",
+    "url": "https://игровая-тигра.рф/",
+    "telephone": "+7-912-307-08-07",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "ул. Толстого, дом 5",
+      "addressLocality": "Аша",
+      "addressCountry": "RU"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 54.9917,
+      "longitude": 57.2744
+    },
+    "priceRange": "$$"
+  })} />
+
+  <ViewTransitions />
+</head>
+<body class={bodyClass}>
+  <AppHeader currentPath={Astro.url.pathname} />
+  <main>
+    <slot />
+  </main>
+  <AppFooter />
+</body>
+</html>

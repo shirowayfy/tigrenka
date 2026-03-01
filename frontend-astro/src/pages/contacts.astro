@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro'
+import ContactsSection from '../components/ContactsSection.astro'
+import MapSection from '../components/MapSection.astro'
+---
+
+<Layout
+  title="Контакты — Игровой центр Тигра в Аше"
+  description="Адрес: г. Аша, ул. Толстого, дом 5. Телефон: +7-912-307-08-07. Как добраться до игрового центра Тигра — карта и контактная информация."
+  bodyClass="contacts-bg"
+>
+  <div class="contacts page container">
+    <ContactsSection />
+    <MapSection />
+  </div>
+</Layout>

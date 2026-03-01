@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro'
+import AppBanner from '../components/AppBanner.astro'
+import AdvantagesSection from '../components/AdvantagesSection.astro'
+import FaqSection from '../components/FaqSection.astro'
+import TeamSection from '../components/TeamSection.astro'
+import ReviewsSection from '../components/ReviewsSection.astro'
+import ContactFormSection from '../components/ContactFormSection.astro'
+import MapSection from '../components/MapSection.astro'
+import { getHomePage } from '../api/home'
+import { strapiMedia } from '../api/strapi'
+
+const pageData = await getHomePage()
+---
+
+<Layout
+  title="Игровой центр Тигра — детский развлекательный центр в Аше"
+  description="Игровой центр Тигра в Аше — детский развлекательный центр с 6 игровыми зонами, батутной ареной, XBOX и банкетной комнатой. Для детей от 1 до 12 лет."
+>
+  <div class="page container">
+    {pageData && (
+      <AppBanner
+        title={pageData.bannerTitle}
+        buttonText={pageData.bannerButtonText}
+        buttonLink={pageData.bannerButtonLink}
+        image={strapiMedia(pageData.bannerImage)}
+      />
+    )}
+    <AdvantagesSection />
+    <FaqSection />
+    <TeamSection />
+    <ReviewsSection />
+    <ContactFormSection />
+    <MapSection />
+  </div>
+</Layout>

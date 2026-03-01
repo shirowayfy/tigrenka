@@ -1,0 +1,133 @@
+:root {
+  --color-primary: #FF9617;
+  --color-primary-dark: #E0850F;
+  --color-primary-light: #FFB85C;
+  --color-text: #2A2A2A;
+  --color-text-secondary: #6B6B6B;
+  --color-background: #FFFFFF;
+  --color-background-secondary: #F5F5F5;
+  --color-accent-light: #FFE7A4;
+  --color-link: #CD7000;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  font-family: 'Montserrat Alternates', sans-serif;
+  color: var(--color-text);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.container {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding-bottom: 80px;
+}
+
+body.contacts-bg {
+  background: linear-gradient(161.49deg, #FFAB45 0%, #FF7520 39.32%, #FF8F52 58.1%, #FFCB5C 100%);
+
+  .header {
+    background-color: transparent;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    gap: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+
+  &--visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__content {
+    position: relative;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 40px 48px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+  }
+
+  &__close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 24px;
+    color: var(--color-text-secondary);
+    transition: color 0.3s;
+
+    &:hover {
+      color: var(--color-text);
+    }
+  }
+
+  &__text {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+}
