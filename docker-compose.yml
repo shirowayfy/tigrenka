@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "1337:1337"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - strapi-data:/app/.tmp
+      - strapi-uploads:/app/public/uploads
+      - ./frontend-astro/src/assets/images:/frontend-astro/src/assets/images:ro
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend-astro
+      dockerfile: Dockerfile
+      args:
+        PUBLIC_STRAPI_URL: http://backend:1337
+    ports:
+      - "4321:4321"
+    env_file:
+      - ./frontend-astro/.env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 4321
+      PUBLIC_STRAPI_URL: http://backend:1337
+      PUBLIC_STRAPI_BROWSER_URL: http://localhost:1337
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  strapi-data:
+  strapi-uploads:

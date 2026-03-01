@@ -1,4 +1,5 @@
-const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || 'http://localhost:1337'
+const STRAPI_URL = process.env.PUBLIC_STRAPI_URL || import.meta.env.PUBLIC_STRAPI_URL || 'http://localhost:1337'
+const STRAPI_BROWSER_URL = process.env.PUBLIC_STRAPI_BROWSER_URL || STRAPI_URL
 
 export async function strapiGet(path, params = {}) {
   const url = new URL(path, STRAPI_URL)
@@ -31,7 +32,7 @@ export function strapiMedia(media) {
   if (!media?.data?.attributes?.url) return ''
   const mediaUrl = media.data.attributes.url
   if (mediaUrl.startsWith('http')) return mediaUrl
-  return `${STRAPI_URL}${mediaUrl}`
+  return `${STRAPI_BROWSER_URL}${mediaUrl}`
 }
 
 export function normalizeCollection(response) {
